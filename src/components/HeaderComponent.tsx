@@ -28,11 +28,14 @@ import {
   IconFingerprint,
   IconCoin,
   IconChevronDown,
+  IconUser,
 } from "@tabler/icons-react";
 
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import HomePage from "../pages/Home";
 import ServicesPage from "../pages/Services";
+import ContactPage from "../pages/Contact";
+import RegisterPage from "../pages/Register";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -251,13 +254,19 @@ export function HeaderComponent() {
                 Services
               </NavLink>
 
-              <a href="#" className={classes.link}>
+              <NavLink to="/contact" className={classes.link}>
                 Contact
-              </a>
+              </NavLink>
             </Group>
             <Group className={classes.hiddenMobile}>
               <Button variant="default">Log in</Button>
-              <Button>Sign up</Button>
+              <Button
+                component="a"
+                href="/register"
+                leftIcon={<IconUser size={rem(18)} />}
+              >
+                Sign up
+              </Button>
             </Group>
             <Burger
               opened={drawerOpened}
@@ -316,6 +325,8 @@ export function HeaderComponent() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/services" element={<ServicesPage />}></Route>
+        <Route path="/contact" element={<ContactPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
