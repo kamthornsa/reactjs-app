@@ -7,6 +7,7 @@ import {
   PasswordInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import axios from "axios";
 
 function RegisterComponent() {
   const form = useForm({
@@ -16,6 +17,7 @@ function RegisterComponent() {
       age: 0,
       password: "",
       confirmPassword: "",
+      picture: "",
     },
     validate: {
       name: (value) =>
@@ -32,7 +34,23 @@ function RegisterComponent() {
     <>
       <Container>
         <Box maw={500} mx="auto">
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
+          <form
+            onSubmit={form.onSubmit(async (values) => {
+              const response = await axios.post(
+                "http://localhost/phpapi/member.php",
+                {
+                  fullname: values.name,
+                  email: values.email,
+                  age: Number(values.age),
+                  password: values.password,
+                  picture: values.picture,
+                }
+              );
+              alert("สมัครสมาชิกเรียบร้อย");
+              // router.replace("./create/files/");
+            })}
+          >
+            {" "}
             <TextInput
               withAsterisk
               label="Name"
@@ -52,12 +70,18 @@ function RegisterComponent() {
               placeholder="กรุณากรอกอายุ"
               {...form.getInputProps("age")}
             />
+            <TextInput
+              type="text"
+              withAsterisk
+              label="รูปภาพ "
+              placeholder="URL"
+              {...form.getInputProps("picture")}
+            />
             <PasswordInput
               label="Password"
               placeholder="Password"
               {...form.getInputProps("password")}
             />
-
             <PasswordInput
               mt="sm"
               label="Confirm password"
