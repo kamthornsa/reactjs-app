@@ -35,6 +35,7 @@ import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import HomePage from "../pages/Home";
 import ServicesPage from "../pages/Services";
 import ContactPage from "../pages/Contact";
+import ClientPage from "../pages/Client";
 import RegisterPage from "../pages/Register";
 
 const useStyles = createStyles((theme) => ({
@@ -254,6 +255,10 @@ export function HeaderComponent() {
                 Services
               </NavLink>
 
+              <NavLink to="/client" className={classes.link}>
+                Client
+              </NavLink>
+
               <NavLink to="/contact" className={classes.link}>
                 Contact
               </NavLink>
@@ -326,6 +331,7 @@ export function HeaderComponent() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/services" element={<ServicesPage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
+        <Route path="/client" element={<ClientPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
       </Routes>
     </BrowserRouter>
