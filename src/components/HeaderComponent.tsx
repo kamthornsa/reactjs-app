@@ -36,6 +36,7 @@ import HomePage from "../pages/Home";
 import ServicesPage from "../pages/Services";
 import ContactPage from "../pages/Contact";
 import RegisterPage from "../pages/Register";
+import ClientPage from "../pages/Client";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -253,7 +254,9 @@ export function HeaderComponent() {
               <NavLink to="/services" className={classes.link}>
                 Services
               </NavLink>
-
+              <NavLink to="/client" className={classes.link}>
+                Clients
+              </NavLink>
               <NavLink to="/contact" className={classes.link}>
                 Contact
               </NavLink>
@@ -325,6 +328,7 @@ export function HeaderComponent() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/services" element={<ServicesPage />}></Route>
+        <Route path="/client" element={<ClientPage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
       </Routes>
