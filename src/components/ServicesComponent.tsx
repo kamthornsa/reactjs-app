@@ -31,6 +31,16 @@ const mockdata = [
     icon: IconCookie,
   },
 ];
+const test = [
+  {
+    id: "111111111",
+    title: "Testttttt",
+  },
+  {
+    id: "2222222",
+    title: "Testttttt",
+  },
+];
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -96,6 +106,12 @@ export function ServicesComponent() {
     </Card>
   ));
 
+  const showTest = test.map((testlist) => (
+    <ul key={testlist.id}>
+      <li>รหัส : {testlist.id}</li>
+      <li>ชื่อ: {testlist.title}</li>
+    </ul>
+  ));
   return (
     <Container size="lg" py="xl">
       <Group position="center">
@@ -103,7 +119,12 @@ export function ServicesComponent() {
           Best company ever
         </Badge>
       </Group>
-
+      {test.map((testlist) => (
+        <ul key={testlist.id}>
+          <li>รหัส : {testlist.id}</li>
+          <li>ชื่อ: {testlist.title}</li>
+        </ul>
+      ))}
       <Title order={2} className={classes.title} ta="center" mt="sm">
         Integrate effortlessly with any technology stack
       </Title>

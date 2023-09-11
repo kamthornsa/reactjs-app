@@ -8,8 +8,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RegisterComponent() {
+  const navigate = useNavigate();
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -47,7 +50,7 @@ function RegisterComponent() {
                 }
               );
               alert("สมัครสมาชิกเรียบร้อย");
-              // router.replace("./create/files/");
+              navigate("/client");
             })}
           >
             {" "}
