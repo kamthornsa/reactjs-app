@@ -8,8 +8,9 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IconSettings, IconTrash } from "@tabler/icons-react";
+import { IconSettings, IconTrash, IconUser } from "@tabler/icons-react";
 import { ModalsProvider, modals } from "@mantine/modals";
+import { Link } from "react-router-dom";
 
 function ClientComponent() {
   const [clients, setClients] = useState([]);
@@ -32,9 +33,12 @@ function ClientComponent() {
       <td>{element.age}</td>
       <td>
         <Group>
-          <ActionIcon variant="filled">
-            <IconSettings size="1rem" />
-          </ActionIcon>
+          <Link to={`/client/${element.id}`}>
+            <ActionIcon variant="filled">
+              <IconUser size="1rem" />
+            </ActionIcon>
+          </Link>
+
           <ActionIcon variant="filled">
             <IconSettings size="1rem" />
           </ActionIcon>
