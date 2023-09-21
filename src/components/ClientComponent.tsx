@@ -5,15 +5,25 @@ import {
   Table,
   Title,
   Text,
+  Button,
+  Center,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { IconSettings, IconTrash, IconUser } from "@tabler/icons-react";
+import {
+  IconEdit,
+  IconPrinter,
+  IconTrash,
+  IconUser,
+} from "@tabler/icons-react";
 import { ModalsProvider, modals } from "@mantine/modals";
 import { Link } from "react-router-dom";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function ClientComponent() {
   const [clients, setClients] = useState([]);
+  const pdfRef = useRef();
   useEffect(() => {
     axios
       .get("http://localhost/phpapi/member.php")
@@ -26,7 +36,7 @@ function ClientComponent() {
   }, []);
   console.log(clients);
 
-  const rows = clients.map((element) => (
+  const rows = clients.map((element: any) => (
     <tr key={element.id}>
       <td>{element.fullname}</td>
       <td>{element.email}</td>
@@ -39,9 +49,11 @@ function ClientComponent() {
             </ActionIcon>
           </Link>
 
-          <ActionIcon variant="filled">
-            <IconSettings size="1rem" />
-          </ActionIcon>
+          <Link to={`/edit/${element.id}`}>
+            <ActionIcon variant="outline" component="a" href="#" color="green">
+              <IconEdit size="1rem" />
+            </ActionIcon>
+          </Link>
           <ActionIcon
             variant="filled"
             onClick={() => openDeleteModal(element.id)}
@@ -67,10 +79,33 @@ function ClientComponent() {
         location.replace("/client");
       },
     });
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4", true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(
+        imgData,
+        "PNG",
+        imgX,
+        imgY,
+        imgWidth * ratio,
+        imgHeight * ratio
+      );
+      pdf.save("client.pdf");
+    });
+  };
   return (
     <>
       <ModalsProvider labels={{ confirm: "Submit", cancel: "Cancel" }}>
-        <Container>
+        <Container ref={pdfRef}>
           <Title>รายชื่อสมาชิก</Title>
           <Table>
             <thead>
@@ -83,6 +118,11 @@ function ClientComponent() {
             </thead>
             <tbody>{rows}</tbody>
           </Table>
+          <Center>
+            <Button onClick={downloadPDF} leftIcon={<IconPrinter />}>
+              Print PDF
+            </Button>
+          </Center>
         </Container>
       </ModalsProvider>
     </>

@@ -38,6 +38,7 @@ import ContactPage from "../pages/Contact";
 import RegisterPage from "../pages/Register";
 import ClientPage from "../pages/Client";
 import ViewUser from "./ViewUser";
+import EditClient from "./EditClient";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -332,9 +333,8 @@ export function HeaderComponent() {
         <Route path="/client" element={<ClientPage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/client/:id" element={<ViewUser />}>
-          {" "}
-        </Route>
+        <Route path="/client/:id" element={<ViewUser />}></Route>
+        <Route path="/edit/:id" element={<EditClient />}></Route>
       </Routes>
     </BrowserRouter>
   );
