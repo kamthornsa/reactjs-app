@@ -5,11 +5,14 @@ import {
   Group,
   Box,
   PasswordInput,
+  Anchor,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RegisterComponent() {
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       name: "",
@@ -47,6 +50,7 @@ function RegisterComponent() {
                 }
               );
               alert("สมัครสมาชิกเรียบร้อย");
+              navigate("/client");
               // router.replace("./create/files/");
             })}
           >
@@ -88,9 +92,13 @@ function RegisterComponent() {
               placeholder="Confirm password"
               {...form.getInputProps("confirmPassword")}
             />
-            <Group position="right" mt="md">
-              <Button type="submit">Submit</Button>
-            </Group>
+            <Group position="left" mt="md">
+                <text>มีบัญชีอยู่แล้ว?</text>
+                <Anchor href="/authentication" color="orange">เข้าสู่ระบบ</Anchor>
+                </Group>
+                <Group position="right" mt="md">
+                    <Button type="submit" color="orange">สมัครสมาชิก</Button>
+                </Group>
           </form>
         </Box>
       </Container>

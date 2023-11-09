@@ -6,8 +6,7 @@ function TitleComponent({ data }: any) {
     <Text
       ta={"center"}
       my={20}
-      variant="gradient"
-      gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+      color="orange"
       fz={"xl"}
       fw={900}
     >

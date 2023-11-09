@@ -24,13 +24,13 @@ const useStyles = createStyles((theme, { variant }: ContactIconStyles) => ({
 
   icon: {
     marginRight: theme.spacing.md,
-    backgroundImage:
-      variant === "gradient"
-        ? `linear-gradient(135deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
-            theme.colors[theme.primaryColor][6]
-          } 100%)`
-        : "none",
-    backgroundColor: "transparent",
+    // backgroundImage:
+    //   variant === "gradient"
+    //     ? `linear-gradient(135deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
+    //         theme.colors[theme.primaryColor][6]
+    //       } 100%)`
+    //     : "none",
+    backgroundColor: "orange",
   },
 
   title: {
@@ -70,7 +70,7 @@ function ContactIcon({
         </ThemeIcon>
       ) : (
         <Box mr="md">
-          <Icon size="1.5rem" />
+          <Icon size="1.5rem"/>
         </Box>
       )}
 
@@ -114,7 +114,7 @@ export function ContactComponent() {
           sx={(theme) => ({
             padding: theme.spacing.xl,
             borderRadius: theme.radius.md,
-            backgroundColor: theme.white,
+            backgroundColor: "theme.white",
           })}
         >
           <ContactIconsList />
@@ -124,9 +124,7 @@ export function ContactComponent() {
           sx={(theme) => ({
             padding: theme.spacing.xl,
             borderRadius: theme.radius.md,
-            backgroundImage: `linear-gradient(135deg, ${
-              theme.colors[theme.primaryColor][6]
-            } 0%, ${theme.colors[theme.primaryColor][4]} 100%)`,
+            backgroundColor: "orange",
           })}
         >
           <ContactIconsList variant="white" />

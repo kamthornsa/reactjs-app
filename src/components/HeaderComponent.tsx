@@ -1,16 +1,12 @@
 import {
   createStyles,
   Header,
-  HoverCard,
   Group,
   Button,
   UnstyledButton,
   Text,
-  SimpleGrid,
   ThemeIcon,
-  Anchor,
   Divider,
-  Center,
   Box,
   Burger,
   Drawer,
@@ -27,9 +23,9 @@ import {
   IconChartPie3,
   IconFingerprint,
   IconCoin,
-  IconChevronDown,
   IconUser,
 } from "@tabler/icons-react";
+import React from "react";
 
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import HomePage from "../pages/Home";
@@ -37,6 +33,15 @@ import ServicesPage from "../pages/Services";
 import ContactPage from "../pages/Contact";
 import ClientPage from "../pages/Client";
 import RegisterPage from "../pages/Register";
+import ViewUser from "./ViewUser";
+import EditUser from "./EditUser";
+import BasicDocument from "./PDFViewer";
+import FormEditNameComponent from "./FormEditName";
+import ContentFormPage from "../pages/FormEditName";
+import FormEducationBreakComponent from "./FormEducationBreak";
+
+
+
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -165,7 +170,7 @@ export function HeaderComponent() {
   ));
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <Box pb={10}>
         <Header height={60} px="md">
           <Group position="apart" sx={{ height: "100%" }}>
@@ -178,13 +183,13 @@ export function HeaderComponent() {
               />
               <Text
                 variant="gradient"
-                gradient={{ from: "orange", to: "cyan", deg: 45 }}
+                gradient={{ from: "orange", to: "darkorange", deg: 45 }}
                 sx={{ fontFamily: "Greycliff CF, sans-serif" }}
                 ta="center"
                 fz="xl"
                 fw={700}
               >
-                CE WEBDESIGN
+                ระบบยื่นคำร้องออนไลน์
               </Text>
             </Group>
             <Group
@@ -193,10 +198,10 @@ export function HeaderComponent() {
               className={classes.hiddenMobile}
             >
               <NavLink to="/" className={classes.link}>
-                Home
+                หน้าแรก
               </NavLink>
 
-              <HoverCard
+              {/* <HoverCard
                 width={600}
                 position="bottom"
                 radius="md"
@@ -249,28 +254,31 @@ export function HeaderComponent() {
                     </Group>
                   </div>
                 </HoverCard.Dropdown>
-              </HoverCard>
+              </HoverCard> */}
 
               <NavLink to="/services" className={classes.link}>
-                Services
+                แบบคำร้อง
               </NavLink>
 
-              <NavLink to="/client" className={classes.link}>
-                Client
-              </NavLink>
+              {/* <NavLink to="/client" className={classes.link}>
+                ติดต่อ
+              </NavLink> */}
 
               <NavLink to="/contact" className={classes.link}>
-                Contact
+                แจ้งเจ้าหน้าที่
               </NavLink>
             </Group>
             <Group className={classes.hiddenMobile}>
-              <Button variant="default">Log in</Button>
+              {/* <Button variant="default">ลงชื่อเข้าใช้</Button> */}
+              <Button 
+              color="orange"
+              component="a"
+              href="/login">เข้าสู่ระบบ</Button>
               <Button
                 component="a"
                 href="/register"
-                leftIcon={<IconUser size={rem(18)} />}
-              >
-                Sign up
+                color="orange"
+                leftIcon={<IconUser size={rem(18)} />}>ลงทะเบียน
               </Button>
             </Group>
             <Burger
@@ -286,7 +294,7 @@ export function HeaderComponent() {
           onClose={closeDrawer}
           size="100%"
           padding="md"
-          title="Navigation"
+          title="ระบบยื่นคำร้อง"
           className={classes.hiddenDesktop}
           zIndex={1000000}
         >
@@ -296,23 +304,23 @@ export function HeaderComponent() {
               color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
             />
 
-            <a href="#" className={classes.link}>
-              Home
+            <a href="/" className={classes.link}>
+              หน้าหลัก
             </a>
-            <UnstyledButton className={classes.link} onClick={toggleLinks}>
+            {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
               <Center inline>
                 <Box component="span" mr={5}>
                   Features
                 </Box>
                 <IconChevronDown size={16} color={theme.fn.primaryColor()} />
               </Center>
-            </UnstyledButton>
+            </UnstyledButton> */}
             <Collapse in={linksOpened}>{links}</Collapse>
-            <a href="#" className={classes.link}>
-              Learn
+            <a href="/services" className={classes.link}>
+              คำร้อง
             </a>
-            <a href="#" className={classes.link}>
-              Academy
+            <a href="/Contact" className={classes.link}>
+              ติดต่อ
             </a>
 
             <Divider
@@ -321,19 +329,39 @@ export function HeaderComponent() {
             />
 
             <Group position="center" grow pb="xl" px="md">
-              <Button variant="default">Log in</Button>
-              <Button>Sign up</Button>
+              <Button 
+              color="orange"
+              component="a"
+              href="/login">เข้าสู่ระบบ</Button>
+              <Button
+                component="a"
+                href="/register"
+                color="orange"
+                leftIcon={<IconUser size={rem(18)} />}>ลงทะเบียน
+              </Button>
             </Group>
           </ScrollArea>
         </Drawer>
       </Box>
-      <Routes>
+      
+      /* <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/services" element={<ServicesPage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
         <Route path="/client" element={<ClientPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path="/client/:id" element={<ViewUser />}>
+          {" "}
+        </Route>
+        <Route path="/client/edit/:id" element={<EditUser />}>
+          {" "}
+        </Route>
+        <Route path="/pdfTest" element={<BasicDocument />}></Route>
+        <Route path="/formEditData" element={<FormEditNameComponent />}></Route>
+        <Route path="/formTest" element={<ContentFormPage />}></Route>
+        <Route path="/formEducationBreak" element={<FormEducationBreakComponent />}></Route>
+      </Routes> */
+   
   );
-}
+} 
+

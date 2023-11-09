@@ -1,36 +1,19 @@
 import {
   createStyles,
-  Badge,
-  Group,
   Title,
   Text,
-  Card,
-  SimpleGrid,
   Container,
   rem,
+  Box,
+  NavLink,
+  Center,
+  Anchor,
 } from "@mantine/core";
-import { IconGauge, IconUser, IconCookie } from "@tabler/icons-react";
+import { IconGauge, IconFingerprint, IconChevronRight, IconActivity } from "@tabler/icons-react";
+import { useState } from "react";
+import { BasicDocument } from "./PDFViewer";
+// import testFormEdit from "./testFormedit";
 
-const mockdata = [
-  {
-    title: "Extreme performance",
-    description:
-      "This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit",
-    icon: IconGauge,
-  },
-  {
-    title: "Privacy focused",
-    description:
-      "People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma",
-    icon: IconUser,
-  },
-  {
-    title: "No third parties",
-    description:
-      "They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves",
-    icon: IconCookie,
-  },
-];
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -76,51 +59,118 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+//---------------FormBox------------------------//
+const data = [
+  { icon: IconGauge, label: 'Dashboard', description: 'Item with description' },
+  {
+    icon: IconFingerprint,
+    label: 'Security',
+    rightSection: <IconChevronRight size="1rem" stroke={1.5} />,
+  },
+  { icon: IconActivity, label: 'Activity' },
+];
+//---------------FormBox------------------------//
+
 export function ServicesComponent() {
   const { classes, theme } = useStyles();
-  const features = mockdata.map((feature) => (
-    <Card
-      key={feature.title}
-      shadow="md"
-      radius="md"
-      className={classes.card}
-      padding="xl"
-    >
-      <feature.icon size={rem(50)} stroke={2} color={theme.fn.primaryColor()} />
-      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
-        {feature.title}
-      </Text>
-      <Text fz="sm" c="dimmed" mt="sm">
-        {feature.description}
-      </Text>
-    </Card>
+  const [active, setActive] = useState(0);
+
+  //---------------FormBox------------------------//
+  const items = data.map((item, index) => (
+    <NavLink
+      key={item.label}
+      active={index === active}
+      label={item.label}
+      description={item.description}
+      rightSection={item.rightSection}
+      icon={<item.icon size="1rem" stroke={1.5} />}
+      onClick={() => setActive(index)}
+    />
   ));
+  //---------------FormBox------------------------//
+  // const features = mockdata.map((feature) => (
 
   return (
+    <>
     <Container size="lg" py="xl">
-      <Group position="center">
-        <Badge variant="filled" size="lg">
+      {/* <Group position="center">
+        <Badge variant="filled" size="lg" color="orange">
           Best company ever
         </Badge>
-      </Group>
-
-      <Title order={2} className={classes.title} ta="center" mt="sm">
-        Integrate effortlessly with any technology stack
+      </Group> */}
+      <Box
+        sx={(theme) => ({
+          display: 'block',
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
+          color: theme.colorScheme === 'dark' ? theme.colors.gray[4] : theme.colors.gray[7],
+          textAlign: 'center',
+          padding: theme.spacing.xl,
+          borderRadius: theme.radius.md,
+          cursor: 'pointer',
+        })}
+      >
+      <Title order={2} className={classes.title} variant="filled" color="orange" ta="center" mt="sm">
+        กรุณาเลือกแบบคำร้อง
       </Title>
 
-      <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs.
-        This happens when hunger drives it to try biting a Steel-type Pokémon.
+      <Text c="dimmed" ta="center" mt="md">
+        กรุณาเลือกแบบคำร้องที่ท่านต้องการเพื่อดำเนินการยื่นคำร้องต่อ
       </Text>
 
-      <SimpleGrid
+            <Center 
+              sx={(theme) => ({
+                '&:hover': {
+                  backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4],
+                },})}><Anchor href="/testDate" color="orange" mt="md">
+            เอกสาร 1
+            </Anchor></Center>
+            <Center
+              sx={(theme) => ({
+                '&:hover': {
+                  backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4],
+                },})}><Anchor href="/services" color="orange" mt="md">
+            เอกสาร 2
+            </Anchor></Center>
+            <Center
+              sx={(theme) => ({
+                '&:hover': {
+                  backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4],
+                },})}><Anchor href="/formROR" color="orange" mt="md">
+            เอกสาร 3
+            </Anchor></Center>
+            <Center
+              sx={(theme) => ({
+                '&:hover': {
+                  backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4],
+                },})}><Anchor href="/formEducationBreak" color="orange" mt="md">
+            คำร้องขอลาพักการเรียน
+            </Anchor></Center>
+            <Center
+              sx={(theme) => ({
+                '&:hover': {
+                  backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4],
+                },})}><Anchor href="/formEditName" color="orange" mt="md">
+            คำร้องขอแก้ไขข้อมูลทางการศึกษา
+          </Anchor></Center>  
+          {/* <BasicDocument />  */}
+      </Box>
+      {/* <SimpleGrid
         cols={3}
         spacing="xl"
         mt={50}
         breakpoints={[{ maxWidth: "md", cols: 1 }]}
       >
         {features}
-      </SimpleGrid>
+      </SimpleGrid> */}
     </Container>
+    {/* //---------------FormBox------------------------// */}
+    {/* <Box w={220} ta="center">{items}</Box>; */}
+    {/* //---------------FormBox------------------------// */}
+    </>
   );
 }

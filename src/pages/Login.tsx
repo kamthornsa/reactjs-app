@@ -1,15 +1,12 @@
 import React from "react";
-import RegisterForm from "../components/RegisterForm";
+import { LoginForm } from "../components/LoginForm";
 import { HeaderComponent } from "../components/HeaderComponent";
 
-function RegisterPage() {
-
+export default function LoginPage() {
   return (
     <>
       <HeaderComponent />
-      <RegisterForm />
+      <LoginForm />
     </>
   );
 }
-
-export default RegisterPage;

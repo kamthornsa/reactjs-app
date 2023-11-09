@@ -1,6 +1,5 @@
 import {
   createStyles,
-  Image,
   Container,
   Title,
   Button,
@@ -10,7 +9,7 @@ import {
   ThemeIcon,
   rem,
 } from "@mantine/core";
-import { IconCheck, IconPrinter, IconFile } from "@tabler/icons-react";
+import { IconCheck, IconPaperclip } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -75,13 +74,11 @@ export function HomeComponent() {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              <IconPrinter size={30} /> วิศวกรรมคอมพิวเตอร์
+              <IconPaperclip size={30} /> ระบบยื่นคำร้อง
             </Title>
 
-            <Text color="dimmed" mt="md">
-              <IconFile /> Build fully functional accessible web applications
-              faster than ever – Mantine includes more than 120 customizable
-              components and hooks to cover you in any situation
+            <Text color="dimmed" mt="md" >
+              ระบบทดสอบการยื่นคำร้องออนไลน์
             </Text>
 
             <List
@@ -89,46 +86,28 @@ export function HomeComponent() {
               spacing="sm"
               size="sm"
               icon={
-                <ThemeIcon size={20} radius="xl">
+                <ThemeIcon size={20} radius="xl" color="yellow">
                   <IconCheck size={rem(12)} stroke={1.5} />
                 </ThemeIcon>
               }
             >
               <List.Item>
-                <b>TypeScript based</b> – build type safe applications, all
-                components and hooks export types
+                <b>สะดวก</b> – ให้ความรวดเร็วจากการใช้ระบบ Internet ในการตรวจสอบข้อมูล!!
               </List.Item>
               <List.Item>
-                <b>Free and open source</b> – all packages have MIT license, you
-                can use Mantine in any project
+                <b>ปลอดภัย</b> – เนื่องจากใช้ระบบข้อมูลในการเก็บเอกสารไร้กังวลเรื่อง เอกสารหาย หรือ เอกสารเสียสภาพ!!
               </List.Item>
               <List.Item>
-                <b>No annoying focus ring</b> – focus ring will appear only when
-                user navigates with keyboard
+                <b>ใช้งานง่าย</b> – เพียงกรอกข้อมูลเล็กน้อยและรอยืนยัน เอกสารก็พร้อมปลิ้นทันที!!
               </List.Item>
             </List>
 
             <Group mt={30}>
-              <Button radius="xl" size="md" className={classes.control}>
-                Get started
-              </Button>
-              <Button
-                variant="default"
-                radius="xl"
-                size="md"
-                className={classes.control}
-                rightIcon={<IconPrinter />}
-              >
-                Source code
+              <Button color="orange" radius="xl" size="md" className={classes.control}>
+                เลือกแบบฟอร์ม
               </Button>
             </Group>
           </div>
-          <Image
-            src={
-              "https://img.freepik.com/free-psd/various-web-printable-templates-with-screen_23-2148450117.jpg"
-            }
-            className={classes.image}
-          />
         </div>
       </Container>
     </div>

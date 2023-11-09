@@ -1,10 +1,12 @@
 import {
-    Container, Table, Title, Image, Group ,
+    Container, Table, Title, Image, Group , Text, 
   } from "@mantine/core";
   import { useEffect, useState } from "react";
-  import axios from "axios";
+  import axios, { Axios } from "axios";
   import { ActionIcon } from '@mantine/core';
-  import { Icon3dCubeSphere, IconAdjustments, IconSettings, IconSubmarine } from '@tabler/icons-react';
+  import { ModalsProvider, modals } from '@mantine/modals';
+  import { Icon3dCubeSphere, IconUser, IconSettings, } from '@tabler/icons-react';
+import { Link } from "react-router-dom";
   
   export function ClientComponent() {
     const [clients, setClients] = useState([]);
@@ -30,21 +32,42 @@ import {
             <td>
                 <Group>
                 <ActionIcon variant="filled" color="red">
-                <Icon3dCubeSphere  size="1rem" />
+                <Icon3dCubeSphere  size="1rem" onClick={() => openDeleteModal(element.id)}/>
                 </ActionIcon>
-                <ActionIcon variant="filled" color="blue">
-                <IconSubmarine size="1rem" />
+                <Link to={`/client/${element.id}`}>
+                <ActionIcon variant="filled">
+                <IconUser size="1rem" />
                 </ActionIcon>
+                </Link>
+                <Link to={`/client/edit/${element.id}`}>
                 <ActionIcon variant="filled">
                 <IconSettings size="1rem" />
                 </ActionIcon>
+                </Link>
                 </Group>
                 </td>
                 
         </tr>
     ));
+
+    const openDeleteModal = (id: any) => modals.openConfirmModal({
+        title: 'Delete ?',
+        children: (
+          <Text size="sm">คุณต้องการลบรายการนี้หรือไม่ ?
+          </Text>
+        ),
+        labels: { confirm: 'ยืนยัน', cancel: 'ยกเลิก' },
+        onCancel: () => console.log('Cancel'),
+        onConfirm: async () => {
+            const res = await axios.delete(`http://localhost/phpapi/member.php?id=${id}`);
+            location.replace("/client");
+        }
+      });
+
     return (
       <Container maw={1200}>
+        <ModalsProvider labels={{ confirm: 'Submit', cancel: 'Cancel' }}>
+        </ModalsProvider>
         <Title>รายชื่อ</Title>
         <Table>
             <thead>
@@ -63,4 +86,4 @@ import {
       </Container>
     );
   }
-  
+export default ClientComponent;

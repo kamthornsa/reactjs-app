@@ -1,14 +1,13 @@
-import { HomeComponent } from "../components/HomeComponent";
+// import { HomeComponent } from "../components/HomeComponent";
+import React from "react";
 import { ServicesComponent } from "../components/ServicesComponent";
-import TitleComponent from "../components/TitleComponent";
+// import { ProtectedRoute } from "../routes/ProtectedRoute";
 
 function ServicesPage() {
-  const title: string = "Service Page";
   return (
     <>
-      <TitleComponent data={title} />
       <ServicesComponent />
-      <HomeComponent />
+      {/* <ProtectedRoute /> */}
     </>
   );
 }
